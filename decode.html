@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <title>Go wasm</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -10,9 +11,11 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <title>Document</title>
   </head>
-
   <body>
+    <script src="wasm_exec.js"></script>
+    <script src="script.js"></script>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
@@ -68,71 +71,64 @@
         </div>
       </div>
     </nav>
-    <div class="main">
-      <script src="wasm_exec.js"></script>
-      <script src="script.js"></script>
-      <div class="container my-5">
-        <h1 class="fs-4">
-          Provided an image and a message to embed in it, as well as a password
-          to secure it. The message is first encrypted using the AES (Advanced
-          Encryption Standard) technique before being integrated in the picture
-          with the LSB algorithm.
-        </h1>
-        <br />
+    <div class="container">
+      <h1 class="fs-4 my-5">
+        The uploaded graphic is first decoded using the Lsb technique, and then
+        ciphertext is obtained, which is decrypted using the key provided by the
+        user, and the data is displayed to the user.
+      </h1>
+      <div class="row">
+        <div class="col-5">
+          <div class="mb-3">
+            <label for="formFile" class="form-label"
+              >Choose file to upload</label
+            >
+            <input
+              class="form-control"
+              onchange="readURL(this)"
+              type="file"
+              id="formFile"
+            />
+          </div>
+          <!-- <input type="file" name="img" onchange="readURL(this)" /> -->
 
-        <!-- file upload -->
-        <div class="row">
-          <div class="col-5">
-            <div class="mb-3 w-75">
-              <label for="formFile" class="form-label"
-                >Choose file to upload</label
-              >
-              <input
-                class="form-control"
-                onchange="readURL(this)"
-                type="file"
-                id="formFile"
-              />
-            </div>
-            <br />
-            <!-- message -->
-            <div class="form-group w-75">
-              <label for="exampleFormControlTextarea1">Secret message</label>
-              <textarea
-                class="form-control"
-                id="msg"
-                rows="3"
-                cols="3"
-              ></textarea>
-            </div>
-
-            <br />
-            <!-- passwoed -->
-            <div class="form-group w-75">
-              <label for="password">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                placeholder="Password"
-              />
-            </div>
-            <br />
-            <button class="btn btn-secondary" onclick="encodeImage(this)">
-              Encode
+          <!-- passwoed -->
+          <div class="form-group w-50">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="passwordDecode"
+              placeholder="Password"
+            />
+            <button
+              class="btn-lg btn-secondary my-4"
+              onclick="decodeImage(this)"
+            >
+              Decode
             </button>
           </div>
-          <div class="col-7">
-            <div class="form-label">Image preview</div>
-            <img src="" id="finalImage" width="100%" height="300px" />
-            <a id="download" href="" download>
-              <button class="btn btn-secondary">Save Image</button>
-            </a>
+
+          <!-- <label for="passwordDecode">password : </label>
+          <input type="password" name="passwordDecode" id="passwordDecode" /> -->
+          <br />
+        </div>
+        <div class="col-7">
+          <!-- message -->
+          <div class="form-group w-75">
+            <label for="exampleFormControlTextarea1">Secret message</label>
+            <textarea
+              class="form-control"
+              id="decodeans"
+              rows="5"
+              cols="3"
+            ></textarea>
           </div>
+          <!-- <textarea id="decodeans">empty</textarea> -->
+          <br />
         </div>
       </div>
     </div>
-    <!-- Option 1: Bootstrap Bundle with Popper -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
