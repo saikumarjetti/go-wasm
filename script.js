@@ -57,3 +57,11 @@ async function encodeImage(e) {
   document.getElementById("finalImage").src = d;
   document.getElementById("download").href = d;
 }
+
+const txtarea = document.getElementById("msg");
+const txtln = document.getElementById("txtlen");
+function updatetxtlen() {
+  let data = txtarea.value;
+  txtln.innerText = `Length : ${data.length}`;
+  // txtln.innerText = `Length : ${data.length}`;
+}
