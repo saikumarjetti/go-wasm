@@ -1,7 +1,5 @@
-let decodeImg;
-let encodeimg;
+let imgArrBuffer;
 if (!WebAssembly.instantiateStreaming) {
-  // polyfill
   WebAssembly.instantiateStreaming = async (resp, importObject) => {
     const source = await (await resp).arrayBuffer();
     return await WebAssembly.instantiate(source, importObject);
@@ -25,26 +23,26 @@ async function run() {
 
 let p = document.getElementById("code");
 
-function toBase64(a) {
-  return btoa(
-    a.split().reduce((data, byte) => data + String.fromCharCode(byte), "")
-  );
-}
+// function toBase64(a) {
+//   return btoa(
+//     a.split().reduce((data, byte) => data + String.fromCharCode(byte), "")
+//   );
+// }
 
 async function decodeImage(e) {
   let uDecodePassword = document.getElementById("passwordDecode").value;
-
-  let msg = imageDecode(decodeImg, uDecodePassword);
+  let msg = imageDecode(imgArrBuffer, uDecodePassword);
   document.getElementById("decodeans").innerHTML = msg;
 }
 
+// converts the image to array buffer
 async function readURL(image) {
   let reader = new FileReader();
   reader.onload = (e) => {
     let data1 = e.target.result;
     let data = new Uint8Array(data1);
 
-    decodeImg = data;
+    imgArrBuffer = data;
   };
   reader.readAsArrayBuffer(image.files[0]);
 }
@@ -52,15 +50,16 @@ async function readURL(image) {
 async function encodeImage(e) {
   let msg = document.getElementById("msg").value;
   let uPassword = document.getElementById("password").value;
-  let yourEncodedImg = imageEncode(decodeImg, msg, uPassword);
+  let yourEncodedImg = imageEncode(imgArrBuffer, msg, uPassword);
   let d = "data:image/png;base64," + yourEncodedImg;
   document.getElementById("finalImage").src = d;
   document.getElementById("download").href = d;
 }
 
-const txtarea = document.getElementById("msg");
-const txtln = document.getElementById("txtlen");
+// display message length to user
 function updatetxtlen() {
+  const txtarea = document.getElementById("msg");
+  const txtln = document.getElementById("txtlen");
   let data = txtarea.value;
   txtln.innerText = `Length : ${data.length}`;
   // txtln.innerText = `Length : ${data.length}`;

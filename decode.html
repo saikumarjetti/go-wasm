@@ -16,9 +16,9 @@
   <body>
     <script src="wasm_exec.js"></script>
     <script src="script.js"></script>
-    <nav class="shadow navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="https://github.com/saikumarjetti/go-wasm">
+        <a class="navbar-brand" href="#">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="45"
@@ -33,7 +33,7 @@
           </svg>
           <div class="text-center">Github</div>
         </a>
-        <div class="d-none d-lg-block fw-normal fs-4">
+        <div class="fs-4">
           Hiding data in Image using Steganography with two-level security
           (using webAssembly)
         </div>
@@ -72,13 +72,13 @@
       </div>
     </nav>
     <div class="container">
-      <h1 class="fs-4 fw-normal my-5">
-        The uploaded image is first decoded using the LSB technique, and
+      <h1 class="fs-4 my-5">
+        The uploaded graphic is first decoded using the Lsb technique, and then
         ciphertext is obtained, which is decrypted using the key provided by the
-        user, and the message is displayed to the user.
+        user, and the data is displayed to the user.
       </h1>
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-5">
           <div class="mb-3">
             <label for="formFile" class="form-label"
               >Choose file to upload</label
@@ -111,8 +111,9 @@
 
           <!-- <label for="passwordDecode">password : </label>
           <input type="password" name="passwordDecode" id="passwordDecode" /> -->
+          <br />
         </div>
-        <div class="col-md-7">
+        <div class="col-7">
           <!-- message -->
           <div class="form-group w-75">
             <label for="exampleFormControlTextarea1">Secret message</label>
@@ -123,6 +124,7 @@
               cols="3"
             ></textarea>
           </div>
+          <!-- <textarea id="decodeans">empty</textarea> -->
           <br />
         </div>
       </div>
