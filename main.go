@@ -150,7 +150,7 @@ func imageEncode(this js.Value, i []js.Value) interface{} {
 
 	// compressing the data using LZW o/p is int[]
 	compressedData := compressLZW(mssg)
-	if debuging {
+	if debuging == true {
 		fmt.Println("compressed data")
 		fmt.Println(compressedData)
 	}
